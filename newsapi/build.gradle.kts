@@ -1,16 +1,17 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+    alias(libs.plugins.org.jetbrains.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
 }
 
-dependencies {
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
-   // implementation("com.squareup.retrofit2:converter-gson:2.5.0")
+dependencies{
+    implementation(libs.retrofit)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.serialization.json)
 }
