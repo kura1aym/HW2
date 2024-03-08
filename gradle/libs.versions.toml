@@ -1,0 +1,15 @@
+[versions]
+coreKtx = "androidx.core:core-ktx:1.9.0"
+lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
+activityCompose = "androidx.activity:activity-compose:1.8.2"
+composeBom = "androidx.compose:compose-bom:2023.03.00"
+composeUi = { module = "androidx.compose.ui:ui", version.ref = "composeBom" }
+composeUiGraphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "composeBom" }
+composeUiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "composeBom" }
+composeMaterial3 = { module = "androidx.compose.material3:material3", version.ref = "composeBom" }
+junit = "junit:junit:4.13.2"
+junitExt = "androidx.test.ext:junit:1.1.5"
+espressoCore = "androidx.test.espresso:espresso-core:3.5.1"
+composeUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "composeBom" }
+composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "composeBom" }
+composeUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "composeBom" }
