@@ -1,5 +1,7 @@
 package dev.androidbroadcast.newsapi
 
+import java.io.Serial
+
 interface NewsApi {
 
     @GET("/everything")
@@ -10,4 +12,16 @@ interface NewsApi {
         @Query("to") languages: String? = null,
         @Query("sortBy") sortBy: SortBy? = null,
     )
+}
+
+//revelancy, popularity, publishedAt
+enum class SortBy {
+    @SerialName("relevancy")
+    RELEVANCY,
+
+    @SerialName("popularity")
+    POPULARITY
+
+    @SerialName("publishedAt")
+    PUBLISHED_AT
 }
