@@ -26,7 +26,7 @@ interface NewsApi {
         @Query("sortBy") sortBy: SortBy? = null,
         @Query("pageSize") @IntRange(from=0, to=100) pageSize: Int = 100,
         @Query("page") @IntRange(from=1)  page: Int = 1,
-    ): Response<Article>
+    ): Result<Response<Article>>
 }
 
 fun NewsApi(
