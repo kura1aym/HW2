@@ -21,13 +21,17 @@ espressoCore = "androidx.test.espresso:espresso-core:3.5.1"
 composeUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "composeBom" }
 composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "composeBom" }
 composeUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "composeBom" }
-org-jetbrains-kotlin-jvm = "1.8.10"
+org-jetbrains-kotlin-jvm = "1.9.22"
 retrofit="2.9.0"
 kotlinx-coroutines = "1.8.0"
 kotlin-serialization = "1.9.22"
 kotlin-serialization-json="1.6.3"
 retrofitAdaptersResult = "1.0.9"
 retrofitConverterKotlinxSerialization = "1.0.0"
+appcompat = "1.6.1"
+material = "1.11.0"
+room = "2.6.1"
+ksp = "1.9.22-1.0.17"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -36,6 +40,8 @@ androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", vers
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycleRuntimeKtx" }
 androidx-annotation = {module = "androidx.annotation:annotation", version.ref = "annotation"}
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 junit = { module = "junit:junit", version.ref = "junit-junit" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
@@ -45,8 +51,13 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 
 retrofit-adapters-result = { module = "com.github.skydoves:retrofit-adapters-result", version.ref = "retrofitAdaptersResult" }
 retrofit-converter-kotlinx-serialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofitConverterKotlinxSerialization" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-app"}
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-jvm" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-serialization" }
+com-android-library = { id = "com.android.library", version.ref = "android-app" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
