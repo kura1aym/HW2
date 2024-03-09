@@ -3,7 +3,7 @@ package dev.androidbroadcast.newsapi.utils
 import okhttp3.Interceptor
 import okhttp3.Response
 
-internal class TimeApiKeyInterceptor(
+internal class NewsApiKeyInterceptor(
     private val apikey: String
 ): Interceptor {
 
