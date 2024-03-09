@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "dev.androidbroadcast.news_main"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
@@ -53,9 +53,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.kotlinx.coroutines.android)
-
-    implementation(project(":database"))
-    implementation(project(":newsapi"))
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
