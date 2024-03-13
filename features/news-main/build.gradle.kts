@@ -54,6 +54,8 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.android)
 
+    implementation(project(":news-data"))
+
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

@@ -36,6 +36,6 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    //ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    api(libs.androidx.room.ktx)
 }
