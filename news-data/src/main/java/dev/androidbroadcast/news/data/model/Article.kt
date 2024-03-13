@@ -1,11 +1,10 @@
 package dev.androidbroadcast.news.data.model
 
-import dev.androidbroadcast.newsapi.modules.SourceDTO
 import java.util.Date
 
 data class Article (
     val id: Long,
-    val source: SourceDTO,
+    val source: Source,
     val author: String,
     val title: String,
     val description: String,
