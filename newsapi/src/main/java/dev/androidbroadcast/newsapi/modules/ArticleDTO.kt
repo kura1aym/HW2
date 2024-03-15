@@ -17,4 +17,6 @@ data class ArticleDTO (
     @Serializable(with = DateTimeUTCSerializer::class)
     val publishedAt: Date,
     @SerialName("content") val content: String,
-    )
+    ) {
+
+}
