@@ -22,14 +22,14 @@ class ArticlesRepository(
     private val api: NewsApi,
 ) {
     fun getAll(): Flow<RequestResult<List<Article>>> {
-        val cashedAllArticles: Flow<RequestResult.Success<List<ArticleDBO>>> = gelAllFromDatabase()
+        val cashedAllArticles: Flow<RequestResult<List<Article>?>> = gelAllFromDatabase()
+            .map { result ->
+                result.map { articleDbos ->
+                    articleDbos?.map {it.toArticle()}
+                }
+            }
+        val remoteArticles = getAllFormServer()
 
-        val remoteArticles: Flow<RequestResult<*>> = getAllFormServer()
-
-
-        cashedAllArticles.map {
-
-        }
         return cashedAllArticles.combine(remoteArticles){
 
         }
