@@ -33,7 +33,7 @@ class ArticlesRepository(
         }
     }
 
-    private fun getAllFormServer(): Flow<RequestResult<List<ArticleDBO>>> {
+    private fun getAllFormServer(): Flow<RequestResult<*>> {
       return flow { emit(api.everything()) }
           .map { result ->
               if (result.isSuccess) {
@@ -43,12 +43,16 @@ class ArticlesRepository(
                   RequestResult.Error(null)
               }
           }
-          .filterIsInstance<RequestResult.Success<List<ArticleDTO>>>()
-          .map {  requestResult: RequestResult.Success<List<ArticleDTO>> ->
-              requestResult.map {dtos -> dtos.map { articleDto -> articleDto.toArticleDbo()  }}
-          }.onEach { requestResult: RequestResult<List<ArticleDBO>> ->
-              database.articlesDao.insert(requestResult.data)
+          .onEach { requestResult ->
+              if (requestResult is RequestResult.Success) {
+                  saveNetResponseToCache(checkNotNull(requestResult.data))
+              }
           }
+    }
+
+    private suspend fun saveNetResponseToCache(data: List<ArticleDTO>) {
+        val dbos = data.map { articleDto -> articleDto.toArticleDbo()  }
+        database.articlesDao.insert(dbos)
     }
 
 
