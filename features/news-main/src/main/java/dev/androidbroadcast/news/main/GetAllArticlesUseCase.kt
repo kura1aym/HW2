@@ -6,7 +6,7 @@ import dev.androidbroadcast.news.data.model.Article
 import kotlinx.coroutines.flow.Flow
 
 class GetAllArticlesUseCase(private val repository: ArticlesRepository) {
-    operator fun invoke(): RequestResult<Flow<List<Article>>> {
+    operator fun invoke(): Flow<RequestResult<List<Article>>> {
         return repository.getAll()
     }
 }
