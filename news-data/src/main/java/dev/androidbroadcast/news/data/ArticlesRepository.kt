@@ -36,8 +36,8 @@ class ArticlesRepository(
                 }
             }
 
-        return cashedAllArticles.combine(remoteArticles){
-
+        return cashedAllArticles.combine(remoteArticles){ dbos: RequestResult<List<Article>>, dtos: RequestResult<List<Article>> ->
+            RequestResult.InProgress()
         }
     }
 
@@ -59,10 +59,12 @@ class ArticlesRepository(
     }
 
 
-    private fun gelAllFromDatabase(): Flow<RequestResult.Success<List<ArticleDBO>>> {
-        return database.articlesDao
+    private fun gelAllFromDatabase(): Flow<RequestResult<List<ArticleDBO>>> {
+        val dbRequest = database.articlesDao
             .getAll()
             .map { RequestResult.Success(it)}
+        val start = flowOf<RequestResult<List<ArticleDBO>>>(RequestResult.InProgress())
+        return merge(start, dbRequest)
     }
 
     suspend fun search(query: String): Flow<Article> {
