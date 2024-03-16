@@ -16,6 +16,7 @@ composeUi = { module = "androidx.compose.ui:ui", version.ref = "composeBom" }
 composeUiGraphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "composeBom" }
 composeUiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "composeBom" }
 composeMaterial3 = { module = "androidx.compose.material3:material3", version.ref = "composeBom" }
+dagger = "2.50"
 junit = "junit:junit:4.13.2"
 junitExt = "androidx.test.ext:junit:1.1.5"
 espressoCore = "androidx.test.espresso:espresso-core:3.5.1"
@@ -33,7 +34,8 @@ appcompat = "1.6.1"
 material = "1.11.0"
 room = "2.6.1"
 ksp = "1.9.22-1.0.17"
-
+kotlin = "1.9.22"
+jakarta-inject = "2.0.1"
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-coreKtx" }
@@ -59,6 +61,12 @@ retrofit-converter-kotlinx-serialization = { module = "com.jakewharton.retrofit:
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
+dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler",version.ref = "dagger" }
+
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+dagger-main = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+jakart-inject = { module = "jakarta.inject:jakarta.inject-api", version.ref = "jakarta-inject"}
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-app"}
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
@@ -66,3 +74,5 @@ org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.re
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-serialization" }
 com-android-library = { id = "com.android.library", version.ref = "android-app" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+dagger-hilt-android = { id = "com.google.dagger.hilt.android",version.ref = "dagger" }
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin"}
