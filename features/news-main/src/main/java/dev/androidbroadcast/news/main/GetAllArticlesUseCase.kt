@@ -5,6 +5,7 @@ import dev.androidbroadcast.news.data.RequestResult
 import dev.androidbroadcast.news.data.map
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import dev.androidbroadcast.news.data.model.Article as DataArticle
 
 class GetAllArticlesUseCase(private val repository: ArticlesRepository) {
     operator fun invoke(): Flow<RequestResult<List<Article>>> {
@@ -17,6 +18,6 @@ class GetAllArticlesUseCase(private val repository: ArticlesRepository) {
     }
 }
 
-private fun dev.androidbroadcast.news.data.model.Article.toUiArticle(): Article {
+private fun DataArticle.toUiArticle(): Article {
     TODO("Not implemented")
 }
