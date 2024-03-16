@@ -11,21 +11,13 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 internal class NewsMainViewModel(
-    private val repository: ArticlesRepository
+    private val getAllArticlesUseCase: GetAllArticlesUseCase
 ):ViewModel() {
-    val state: StateFlow<State> = repository.getAll()
-        .map { requestResult->
-            requestResult.map { articles ->
-                articles.map { it.toUiArticle() }
-            }
-        }
-        .map { it.toState() }
+    val state: StateFlow<State> = getAllArticlesUseCase()
+        .map{ it.toState() }
         .stateIn(viewModelScope, SharingStarted.Lazily, State.None)
 }
 
-private fun dev.androidbroadcast.news.data.model.Article.toUiArticle(): Article {
-    TODO("Not implemented")
-}
 
 private fun RequestResult<List<Article>>.toState(): State {
     return when(this) {
