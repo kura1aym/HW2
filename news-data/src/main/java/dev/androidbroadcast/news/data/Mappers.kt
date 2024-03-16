@@ -8,7 +8,7 @@ internal fun ArticleDBO.toArticle() : Article {
     TODO("Not implemented")
 }
 
-internal fun ArticleDTO.toArticle(): ArticleDBO{
+internal fun ArticleDTO.toArticle(): Article{
     TODO("Not yet implemented")
 }
 
