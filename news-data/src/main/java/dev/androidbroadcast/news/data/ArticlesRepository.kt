@@ -7,21 +7,23 @@ import dev.androidbroadcast.newsapi.NewsApi
 import dev.androidbroadcast.newsapi.modules.ArticleDTO
 import dev.androidbroadcast.newsapi.modules.ResponseDTO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
-import java.io.IOException
 
 class ArticlesRepository(
     private val database: NewsDatabase,
     private val api: NewsApi,
 ) {
-    fun getAll(): Flow<RequestResult<List<Article>>> {
+    fun getAll(
+        mergeStrategy: MergeStrategy<RequestResult<List<Article>>> = RequestResponseMergeStrategy()
+    ): Flow<RequestResult<List<Article>>> {
         val cashedAllArticles: Flow<RequestResult<List<Article>>> = gelAllFromDatabase()
             .map { result ->
                 result.map { articleDbos ->
@@ -29,19 +31,26 @@ class ArticlesRepository(
                 }
             }
 
-        val remoteArticles: Flow<RequestResult<List<Article>>> = getAllFormServer()
+        val remoteArticles: Flow<RequestResult<List<Article>>> = getAllFromServer()
             .map { result: RequestResult<ResponseDTO<ArticleDTO>> ->
                 result.map { response ->
                     response.articles.map {it.toArticle()}
                 }
             }
 
-        return cashedAllArticles.combine(remoteArticles){ dbos: RequestResult<List<Article>>, dtos: RequestResult<List<Article>> ->
-            RequestResult.InProgress()
-        }
+        return cashedAllArticles.combine(remoteArticles, mergeStrategy::merge)
+            .flatMapLatest { result ->
+                if (result is RequestResult.Success) {
+                    database.articlesDao.observeAll()
+                        .map { dbos -> dbos.map {it.toArticle()}}
+                        .map { RequestResult.Success(it)}
+                } else {
+                    flowOf(result)
+                }
+            }
     }
 
-    private fun getAllFormServer(): Flow<RequestResult<ResponseDTO<ArticleDTO>>> {
+    private fun getAllFromServer(): Flow<RequestResult<ResponseDTO<ArticleDTO>>> {
         val apiRequest = flow { emit(api.everything()) }
             .onEach { result ->
                 if (result.isSuccess) {
@@ -60,8 +69,7 @@ class ArticlesRepository(
 
 
     private fun gelAllFromDatabase(): Flow<RequestResult<List<ArticleDBO>>> {
-        val dbRequest = database.articlesDao
-            .getAll()
+        val dbRequest = database.articlesDao::getAll.asFlow()
             .map { RequestResult.Success(it)}
         val start = flowOf<RequestResult<List<ArticleDBO>>>(RequestResult.InProgress())
         return merge(start, dbRequest)
@@ -73,30 +81,5 @@ class ArticlesRepository(
     }
 }
 
-sealed class RequestResult<out E>(internal val data: E? = null) {
-    class InProgress<E>(data: E? = null) : RequestResult<E>(data)
-    class Success<E: Any>(data: E) : RequestResult<E>(data)
-    class Error<E>(data: E? = null) : RequestResult<E>()
-}
 
-internal fun <T: Any> RequestResult<T?>.requireData(): T = checkNotNull(data)
-
-internal fun <I, O> RequestResult<I>.map(mapper: (I) -> O): RequestResult<O> {
-    return when(this) {
-        is RequestResult.Success -> {
-            val outData: O = mapper(checkNotNull(data))
-            RequestResult.Success(checkNotNull( outData))
-        }
-        is RequestResult.Error -> RequestResult.Error(data?.let(mapper))
-        is RequestResult.InProgress -> RequestResult.InProgress(data?.let(mapper))
-    }
-}
-
-internal fun <T> Result<T>.toRequestResult(): RequestResult<T> {
-    return when {
-        isSuccess -> RequestResult.Success(getOrThrow())
-        isFailure -> RequestResult.Error()
-        else -> error("Impossible branch")
-    }
-}
 
