@@ -19,6 +19,9 @@ internal class NewsMainViewModel @Inject constructor(
         .map{ it.toState() }
         .stateIn(viewModelScope, SharingStarted.Lazily, State.None)
 
+    fun forceUpdate() {
+
+    }
 
 }
 
