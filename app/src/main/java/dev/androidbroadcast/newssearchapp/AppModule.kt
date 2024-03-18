@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dev.androidbroadcast.common.AppDispatchers
 import dev.androidbroadcast.news.database.NewsDatabase
 import dev.androidbroadcast.newsapi.NewsApi
 import javax.inject.Singleton
@@ -27,4 +28,9 @@ object AppModule {
     fun provideNewsdatabase(@ApplicationContext context: Context): NewsDatabase {
         return NewsDatabase(context)
     }
+
+
+    @Provides
+    @Singleton
+    fun provideAppCoroutineDispatchers(): AppDispatchers  = AppDispatchers()
 }

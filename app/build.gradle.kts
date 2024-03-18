@@ -70,6 +70,7 @@ dependencies {
     implementation(project(":newsapi"))
     implementation(project(":news-data"))
     implementation(project(":database"))
+    implementation(project(":news-common"))
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
