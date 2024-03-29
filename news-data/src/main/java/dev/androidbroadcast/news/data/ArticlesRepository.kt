@@ -1,6 +1,5 @@
 package dev.androidbroadcast.news.data
 
-import androidx.room.Query
 import dev.androidbroadcast.common.Logger
 import dev.androidbroadcast.news.data.model.Article
 import dev.androidbroadcast.news.database.NewsDatabase
@@ -53,7 +52,7 @@ class ArticlesRepository @Inject constructor(
         val apiRequest = flow { emit(api.everything(query = query)) }
             .onEach { result ->
                 if (result.isSuccess) {
-                    saveNetResponseToCache(result.getOrThrow().articles)
+                    saveArticlesToCache(result.getOrThrow().articles)
                 }
             }
             .onEach { result ->
@@ -71,7 +70,7 @@ class ArticlesRepository @Inject constructor(
             }
     }
 
-    private suspend fun saveNetResponseToCache(data: List<ArticleDTO>) {
+    private suspend fun saveArticlesToCache(data: List<ArticleDTO>) {
         val dbos = data.map { articleDto -> articleDto.toArticleDbo()  }
         database.articlesDao.insert(dbos)
     }
@@ -79,10 +78,10 @@ class ArticlesRepository @Inject constructor(
 
     private fun gelAllFromDatabase(): Flow<RequestResult<List<Article>>> {
         val dbRequest = database.articlesDao::getAll.asFlow()
-            .map { RequestResult.Success(it)}
+            .map<List<ArticleDBO>, RequestResult<List<ArticleDBO>>> { RequestResult.Success(it)}
             .catch {
-                RequestResult.Error<List<ArticleDBO>>(error = it)
                 logger.e(LOG_TAG, "Error getting  from database. Cause = $it")
+                emit(RequestResult.Error(error = it))
             }
 
 

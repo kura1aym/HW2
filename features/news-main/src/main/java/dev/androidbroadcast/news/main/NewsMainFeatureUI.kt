@@ -104,11 +104,14 @@ private fun Articles(
 @Preview
 @Composable
 internal fun Article(
-    @PreviewParameter(ArticlesPreviewProvider::class) article: ArticleUI
+    @PreviewParameter(ArticlesPreviewProvider::class, limit = 1) article: ArticleUI,
 ) {
     Column(modifier = Modifier.size(8.dp)) {
-        Text(text = article.title ?: "NO TITLE", style = MaterialTheme.typography.headlineMedium, maxLines = 1)
-
+        Text(
+            text = article.title ?: "NO TITLE",
+            style = MaterialTheme.typography.headlineMedium,
+            maxLines = 1
+        )
         Spacer(modifier = Modifier.size(4.dp))
         Text(text = article.description, style = MaterialTheme.typography.bodyMedium, maxLines = 3)
 
