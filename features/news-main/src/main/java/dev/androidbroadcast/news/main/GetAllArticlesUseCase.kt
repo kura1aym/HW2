@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import dev.androidbroadcast.news.data.model.Article as DataArticle
 
-class GetAllArticlesUseCase @Inject constructor(
+internal class GetAllArticlesUseCase @Inject constructor(
     private val repository: ArticlesRepository,
 ) {
-    operator fun invoke(): Flow<RequestResult<List<Article>>> {
-        return repository.getAll()
+    operator fun invoke(query: String): Flow<RequestResult<List<ArticleUI>>> {
+        return repository.getAll(query)
             .map { requestResult->
                 requestResult.map { articles ->
                     articles.map { it.toUiArticle() }
@@ -21,6 +21,12 @@ class GetAllArticlesUseCase @Inject constructor(
     }
 }
 
-private fun DataArticle.toUiArticle(): Article {
-    TODO("Not implemented")
+private fun DataArticle.toUiArticle(): ArticleUI {
+    return ArticleUI(
+        id = cacheId,
+        title = title,
+        description = description,
+        imageUrl = this.urlToImage,
+        url = url
+    )
 }
