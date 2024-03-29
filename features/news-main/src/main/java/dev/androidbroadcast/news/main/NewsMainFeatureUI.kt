@@ -47,9 +47,9 @@ internal fun ArticlesWithError(articles: List<ArticleUI>?) {
     Column {
         Box(
             Modifier
-                .padding(8.dp)
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.error),
+                .background(MaterialTheme.colorScheme.error)
+                .padding(8.dp),
             contentAlignment = Alignment.Center)
         {
             Text(text = "Error during update", color = MaterialTheme.colorScheme.onError)
@@ -68,8 +68,8 @@ internal fun ArticlesDuringUpdate(
    Column {
        Box(
            Modifier
-               .padding(8.dp)
-               .fillMaxWidth(),
+               .fillMaxWidth()
+               .padding(8.dp),
            contentAlignment = Alignment.Center) {
            CircularProgressIndicator()
        }

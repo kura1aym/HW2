@@ -1,4 +1,4 @@
-package dev.androidbroadcast.newssearchapp.ui.theme
+package dev.androidbroadcast.news
 
 import android.app.Activity
 import android.os.Build
@@ -38,7 +38,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun NewsSearchAppTheme(
+fun NewsTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

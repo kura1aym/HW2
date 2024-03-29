@@ -57,25 +57,21 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
 //    implementation(libs.kotlinx.serialization.json)
 //    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
+
     implementation(project(":newsapi"))
     implementation(project(":news-data"))
     implementation(project(":database"))
     implementation(project(":news-common"))
     implementation(project(":features:news-main"))
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation(project(":news-uikit"))
+    debugImplementation(libs.logging.interceptor)
 }

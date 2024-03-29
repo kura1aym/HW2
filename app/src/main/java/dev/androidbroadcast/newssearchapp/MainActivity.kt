@@ -9,14 +9,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import dev.androidbroadcast.news.main.NewsMainScreen
-import dev.androidbroadcast.newssearchapp.ui.theme.NewsSearchAppTheme
+import dev.androidbroadcast.news.uikit.theme.NewsTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            NewsSearchAppTheme {
+            NewsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
