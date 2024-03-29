@@ -13,7 +13,7 @@ data class ArticleDBO(
     @ColumnInfo("title") val title: String,
     @ColumnInfo("description") val description: String,
     @ColumnInfo("url") val url: String,
-    @ColumnInfo("urlToImage") val urlToImage: String,
+    @ColumnInfo("urlToImage") val urlToImage: String?,
     @ColumnInfo("publishedAt") val publishedAt: Date,
     @ColumnInfo("content") val content: String,
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
