@@ -1,5 +1,7 @@
 package dev.androidbroadcast.news.data
 
+import androidx.room.Query
+import dev.androidbroadcast.common.Logger
 import dev.androidbroadcast.news.data.model.Article
 import dev.androidbroadcast.news.database.NewsDatabase
 import dev.androidbroadcast.news.database.models.ArticleDBO
@@ -10,8 +12,8 @@ import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
@@ -19,17 +21,20 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 
+
 @Singleton
 class ArticlesRepository @Inject constructor(
     private val database: NewsDatabase,
     private val api: NewsApi,
+    private val logger: Logger,
 ) {
 
     fun getAll(
+        query: String,
         mergeStrategy: MergeStrategy<RequestResult<List<Article>>> = RequestResponseMergeStrategy(),
     ): Flow<RequestResult<List<Article>>> {
         val cashedAllArticles: Flow<RequestResult<List<Article>>> = gelAllFromDatabase()
-        val remoteArticles: Flow<RequestResult<List<Article>>> = getAllFromServer()
+        val remoteArticles: Flow<RequestResult<List<Article>>> = getAllFromServer(query)
 
 
         return cashedAllArticles.combine(remoteArticles, mergeStrategy::merge)
@@ -44,11 +49,16 @@ class ArticlesRepository @Inject constructor(
             }
     }
 
-    private fun getAllFromServer(): Flow<RequestResult<List<Article>>> {
-        val apiRequest = flow { emit(api.everything()) }
+    private fun getAllFromServer(query: String): Flow<RequestResult<List<Article>>> {
+        val apiRequest = flow { emit(api.everything(query = query)) }
             .onEach { result ->
                 if (result.isSuccess) {
                     saveNetResponseToCache(result.getOrThrow().articles)
+                }
+            }
+            .onEach { result ->
+                if(result.isFailure) {
+                    logger.e(LOG_TAG, "Error getting data from server. Cause = ${result.exceptionOrNull()}")
                 }
             }
             .map {it.toRequestResult() }
@@ -70,17 +80,22 @@ class ArticlesRepository @Inject constructor(
     private fun gelAllFromDatabase(): Flow<RequestResult<List<Article>>> {
         val dbRequest = database.articlesDao::getAll.asFlow()
             .map { RequestResult.Success(it)}
+            .catch {
+                RequestResult.Error<List<ArticleDBO>>(error = it)
+                logger.e(LOG_TAG, "Error getting  from database. Cause = $it")
+            }
+
+
         val start = flowOf<RequestResult<List<ArticleDBO>>>(RequestResult.InProgress())
         return merge(start, dbRequest).map { result ->
-                result.map { articleDbos ->
-                    articleDbos.map {it.toArticle()}
+                result.map { dbos ->
+                    dbos.map {it.toArticle()}
                 }
             }
     }
 
-    suspend fun search(query: String): Flow<Article> {
-        api.everything()
-        TODO("NOT IMPLEMENTED")
+    private companion object {
+        const val LOG_TAG = "ArticlesRepository"
     }
 
 }
