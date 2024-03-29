@@ -34,9 +34,9 @@ private fun RequestResult<List<ArticleUI>>.toState(): State {
     }
 }
 
-internal sealed class State {
-    object None : State()
-    class Loading(val articles: List<ArticleUI>? = null) : State()
-    class Error(val articles: List<ArticleUI>? = null) : State()
-    class Success(val articles: List<ArticleUI>) : State()
+internal sealed class State(val articles: List<ArticleUI>?) {
+    data object None : State(articles = null)
+    class Loading(articles: List<ArticleUI>? = null) : State(articles)
+    class Error(articles: List<ArticleUI>? = null) : State(articles)
+    class Success(articles: List<ArticleUI>) : State(articles)
 }
