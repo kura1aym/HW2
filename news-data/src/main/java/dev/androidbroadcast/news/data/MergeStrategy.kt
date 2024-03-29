@@ -17,6 +17,8 @@ internal class RequestResponseMergeStrategy<T : Any> : MergeStrategy<RequestResu
             right is Success && left is Success -> merge(right, left)
             right is Success && left is Error -> merge(right, left)
             right is InProgress && left is Error -> merge(right, left)
+            right is Error && left is InProgress -> merge(right, left)
+            right is Error && left is Success -> merge(right, left)
 
             else -> error("Unimplemented branch right=$right & left=$left")
         }
@@ -52,7 +54,13 @@ internal class RequestResponseMergeStrategy<T : Any> : MergeStrategy<RequestResu
         return Error(data = server.data ?: cache.data, error = server.error)
     }
 
+    private fun merge(cache: Error<T>, server: InProgress<T>): RequestResult<T> {
+        return server
+    }
 
+    private fun merge(cache: Error<T>, server: Success<T>): RequestResult<T> {
+        return server
+    }
 
 //    private fun merge(
 //        cache: RequestResult.Success<T>,
