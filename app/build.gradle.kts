@@ -21,8 +21,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField("String", "NEWS_API_KEY", "\"\"")
-        buildConfigField("String", "NEWS_API_BASE_URL", "\"\"")
+
+        buildConfigField("String", "NEWS_API_KEY", "\"929bd6d7ba07471db634d2a1f3f90023\"")
+        buildConfigField("String", "NEWS_API_BASE_URL", "\"https://newsapi.org/v2\"")
     }
 
     buildTypes {
@@ -67,10 +68,14 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
+//    implementation(libs.kotlinx.serialization.json)
+//    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
     implementation(project(":newsapi"))
     implementation(project(":news-data"))
     implementation(project(":database"))
     implementation(project(":news-common"))
+    implementation(project(":features:news-main"))
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
