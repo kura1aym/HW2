@@ -12,27 +12,11 @@ import dev.androidbroadcast.common.Logger
 import dev.androidbroadcast.news.database.NewsDatabase
 import dev.androidbroadcast.newsapi.NewsApi
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-    @Provides
-    @Singleton
-    fun provideHttpClient(): OkHttpClient?{
-        if (BuildConfig.DEBUG) {
-            val logging = HttpLoggingInterceptor()
-                .setLevel(HttpLoggingInterceptor.Level.BODY)
-            return OkHttpClient.Builder()
-                .addInterceptor(logging)
-                .build()
-        }
-
-        return null
-
-    }
 
     @Provides
     @Singleton
