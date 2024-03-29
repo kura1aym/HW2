@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import dev.androidbroadcast.news.main.NewsMainScreen
-import dev.androidbroadcast.news.uikit.theme.NewsTheme
+import dev.androidbroadcast.news.NewsTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

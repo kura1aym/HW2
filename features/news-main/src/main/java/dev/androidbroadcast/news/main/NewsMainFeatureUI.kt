@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -23,6 +22,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.androidbroadcast.news.NewsTheme
 
 @Composable
 fun NewsMainScreen() {
@@ -61,12 +61,12 @@ private fun ErrorMessage(state: State.Error) {
     Box(
         Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.error)
+            .background(NewsTheme.colorScheme.error)
             .padding(8.dp),
         contentAlignment = Alignment.Center
     )
     {
-        Text(text = "Error during update", color = MaterialTheme.colorScheme.onError)
+        Text(text = "Error during update", color = NewsTheme.colorScheme.onError)
     }
 }
 
@@ -104,12 +104,16 @@ internal fun Article(
 ) {
     Column(modifier = Modifier.size(8.dp)) {
         Text(
-            text = article.title ?: "NO TITLE",
-            style = MaterialTheme.typography.headlineMedium,
+            text = article.title,
+            style = NewsTheme.typography.headlineMedium,
             maxLines = 1
         )
         Spacer(modifier = Modifier.size(4.dp))
-        Text(text = article.description, style = MaterialTheme.typography.bodyMedium, maxLines = 3)
+        Text(
+            text = article.description,
+            style = NewsTheme.typography.bodyMedium,
+            maxLines = 3
+        )
 
     }
 }

@@ -57,6 +57,7 @@ dependencies {
     kapt(libs.dagger.hilt.compiler)
 
     implementation(project(":news-data"))
+    implementation(project(":news-uikit"))
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
