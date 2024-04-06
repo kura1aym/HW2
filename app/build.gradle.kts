@@ -1,9 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.serialization")
-    id("com.google.dagger.hilt.android")
-    id("org.jetbrains.kotlin.kapt")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId = "dev.androidbroadcast.newssearchapp"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -22,8 +22,8 @@ android {
             useSupportLibrary = true
         }
 
-        buildConfigField("String", "NEWS_API_KEY", "\"929bd6d7ba07471db634d2a1f3f90023\"")
-        buildConfigField("String", "NEWS_API_BASE_URL", "\"https://newsapi.org/v2\"")
+        buildConfigField("String","NEWS_API_KEY","\"6a3f454ca118497faf0e2a42d951546d\"")
+        buildConfigField("String","NEWS_API_BASE_URL","\"https://newsapi.org/v2/\"")
     }
 
     buildTypes {
@@ -47,7 +47,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
+        kotlinCompilerExtensionVersion = "1.5.9"
     }
     packaging {
         resources {
@@ -60,18 +60,18 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation(platform(libs.androidx.compose.bom))
 
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
-//    implementation(libs.kotlinx.serialization.json)
-//    implementation(libs.okhttp)
 
-    implementation(project(":newsapi"))
     implementation(project(":news-data"))
+    implementation(project(":newsapi"))
+    implementation(project(":features:news-main"))
     implementation(project(":database"))
     implementation(project(":news-common"))
-    implementation(project(":features:news-main"))
     implementation(project(":news-uikit"))
-    debugImplementation(libs.logging.interceptor)
+
+    debugImplementation(libs.okhttp.logging.interceptor)
+
 }

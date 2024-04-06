@@ -1,7 +1,8 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("java-library")
-    id("org.jetbrains.kotlin.jvm")
-    id("org.jetbrains.kotlin.plugin.serialization")
+    alias(libs.plugins.jetbrainsKotlinJvm)
+    alias(libs.plugins.kotlinSerialization)
     //alias(libs.plugins.org.jetbrains.kotlin.jvm)
     //alias(libs.plugins.kotlin.serialization)
 }
@@ -17,7 +18,7 @@ dependencies{
     api(libs.kotlinx.serialization.json)
     implementation(libs.androidx.annotation)
     implementation(libs.retrofit.converter.kotlinx.serialization)
-    implementation(libs.retrofit.adapters.result)
+    implementation (libs.retrofit.adapters.result)
     api(libs.okhttp)
 }
 

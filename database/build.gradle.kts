@@ -1,12 +1,12 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.com.android.library)
-    alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "dev.androidbroadcast.news.database"
+    namespace = "dev.androidbroadcast.database"
     compileSdk = 34
 
     defaultConfig {
@@ -35,7 +35,9 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     ksp(libs.androidx.room.compiler)
-    api(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.ktx)
+
 }
