@@ -1,10 +1,10 @@
-package dev.androidbroadcast.news.database.dao
+package dev.androidbroadcast.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import dev.androidbroadcast.news.database.models.ArticleDBO
+import dev.androidbroadcast.database.models.ArticleDBO
 import kotlinx.coroutines.flow.Flow
 
 

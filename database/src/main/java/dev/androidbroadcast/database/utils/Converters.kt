@@ -1,4 +1,4 @@
-package dev.androidbroadcast.news.database.utils
+package dev.androidbroadcast.database.utils
 
 import androidx.room.TypeConverter
 import java.text.DateFormat

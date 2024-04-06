@@ -1,13 +1,13 @@
-package dev.androidbroadcast.news.database
+package dev.androidbroadcast.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import dev.androidbroadcast.news.database.dao.ArticleDao
-import dev.androidbroadcast.news.database.models.ArticleDBO
-import dev.androidbroadcast.news.database.utils.Converters
+import dev.androidbroadcast.database.dao.ArticleDao
+import dev.androidbroadcast.database.models.ArticleDBO
+import dev.androidbroadcast.database.utils.Converters
 
 class NewsDatabase internal constructor (private val database: NewsRoomDatabase) {
     val articlesDao : ArticleDao

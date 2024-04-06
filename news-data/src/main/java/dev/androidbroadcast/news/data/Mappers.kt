@@ -2,61 +2,47 @@ package dev.androidbroadcast.news.data
 
 import dev.androidbroadcast.news.data.model.Article
 import dev.androidbroadcast.news.data.model.Source
-import dev.androidbroadcast.news.database.models.ArticleDBO
-import dev.androidbroadcast.news.database.models.SourceDBO
-import dev.androidbroadcast.newsapi.modules.ArticleDTO
-import dev.androidbroadcast.newsapi.modules.SourceDTO
+import dev.androidbroadcast.database.models.ArticleDBO
+import dev.androidbroadcast.database.models.SourceDBO
+import dev.androidbroadcast.newsapi.models.ArticleDTO
 
-internal fun SourceDBO.toSource() : Source {
-    return Source(id = id, name = name)
-}
-
-internal fun SourceDTO.toSource() : Source {
-    return Source(id = id ?: name, name = name)
-}
-
-internal fun SourceDTO.toSourceDbo() : SourceDBO {
-    return SourceDBO(id = id ?: name, name = name)
-}
-
-internal fun ArticleDBO.toArticle() : Article {
+internal fun ArticleDBO.toArticle(): Article {
     return Article(
         cacheId = id,
-        source = source.toSource(),
+        source = Source(id = source.id, name = source.name),
         author = author,
         title = title,
         description = description,
         url = url,
         urlToImage = urlToImage,
         publishedAt = publishedAt,
-        content = content,
+        content = content
     )
 }
 
-internal fun ArticleDTO.toArticle(): Article{
+internal fun ArticleDTO.toArticle(): Article {
     return Article(
-        source = source.toSource(),
-        author = author,
+        source = Source(id = source.id, name = source.name),
+        author = author ?: "",
         title = title,
         description = description,
         url = url,
         urlToImage = urlToImage,
         publishedAt = publishedAt,
-        content = content,
+        content = content
     )
 }
-
 
 internal fun ArticleDTO.toArticleDbo(): ArticleDBO{
     return ArticleDBO(
-        source = source.toSourceDbo(),
-        author = author,
+        source = SourceDBO(id = source.id, name = source.name),
+        author = author ?: "",
         title = title,
         description = description,
         url = url,
         urlToImage = urlToImage,
         publishedAt = publishedAt,
         content = content,
+        id = 0
     )
 }
-

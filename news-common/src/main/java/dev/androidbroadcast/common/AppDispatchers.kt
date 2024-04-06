@@ -9,6 +9,4 @@ class AppDispatchers(
     val io: CoroutineDispatcher = Dispatchers.IO,
     val main: MainCoroutineDispatcher = Dispatchers.Main,
     val unconfined: CoroutineDispatcher = Dispatchers.Unconfined,
-) {
-
-}
+)
