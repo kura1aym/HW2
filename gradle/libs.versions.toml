@@ -23,6 +23,7 @@ retrofitConverterKotlinxSerialization = "1.0.0"
 room = "2.6.1"
 material = "1.11.0"
 coil="2.6.0"
+detekt = "1.23.3"
 
 [libraries]
 
@@ -88,3 +89,5 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger"}
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin"}
+androidx-room = { id = "androidx.room", version.ref = "room"}
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
