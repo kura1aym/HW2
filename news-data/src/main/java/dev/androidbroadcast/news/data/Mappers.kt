@@ -1,9 +1,9 @@
 package dev.androidbroadcast.news.data
 
-import dev.androidbroadcast.news.data.model.Article
-import dev.androidbroadcast.news.data.model.Source
 import dev.androidbroadcast.database.models.ArticleDBO
 import dev.androidbroadcast.database.models.SourceDBO
+import dev.androidbroadcast.news.data.model.Article
+import dev.androidbroadcast.news.data.model.Source
 import dev.androidbroadcast.newsapi.models.ArticleDTO
 
 internal fun ArticleDBO.toArticle(): Article {
@@ -33,7 +33,7 @@ internal fun ArticleDTO.toArticle(): Article {
     )
 }
 
-internal fun ArticleDTO.toArticleDbo(): ArticleDBO{
+internal fun ArticleDTO.toArticleDbo(): ArticleDBO {
     return ArticleDBO(
         source = SourceDBO(id = source.id, name = source.name),
         author = author ?: "",

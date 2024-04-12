@@ -9,9 +9,9 @@ import dev.androidbroadcast.database.dao.ArticleDao
 import dev.androidbroadcast.database.models.ArticleDBO
 import dev.androidbroadcast.database.utils.Converters
 
-class NewsDatabase internal constructor (private val database: NewsRoomDatabase) {
-    val articlesDao : ArticleDao
-            get() = database.articlesDao()
+class NewsDatabase internal constructor(private val database: NewsRoomDatabase) {
+    val articlesDao: ArticleDao
+        get() = database.articlesDao()
 }
 
 @Database(entities = [ArticleDBO::class], version = 1)
@@ -26,5 +26,5 @@ fun NewsDatabase(applicationContext: Context): NewsDatabase {
         NewsRoomDatabase::class.java,
         "news"
     ).build()
-    return  NewsDatabase(newsRoomDatabase)
+    return NewsDatabase(newsRoomDatabase)
 }

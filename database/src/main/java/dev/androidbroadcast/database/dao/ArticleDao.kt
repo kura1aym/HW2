@@ -7,7 +7,6 @@ import androidx.room.Query
 import dev.androidbroadcast.database.models.ArticleDBO
 import kotlinx.coroutines.flow.Flow
 
-
 @Dao
 interface ArticleDao {
 

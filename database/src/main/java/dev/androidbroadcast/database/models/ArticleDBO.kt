@@ -19,7 +19,7 @@ data class ArticleDBO(
     @PrimaryKey(autoGenerate = true) val id: Long,
 )
 
-data class SourceDBO (
+data class SourceDBO(
     val id: String?,
     val name: String?
 )

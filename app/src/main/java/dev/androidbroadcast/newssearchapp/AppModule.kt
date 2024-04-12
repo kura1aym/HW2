@@ -6,9 +6,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import dev.androidbroadcast.common.AndroidLogcatLogger
 import dev.androidbroadcast.common.AppDispatchers
 import dev.androidbroadcast.common.Logger
+import dev.androidbroadcast.common.androidLogcatLogger
 import dev.androidbroadcast.database.NewsDatabase
 import dev.androidbroadcast.newsapi.NewsApi
 import okhttp3.OkHttpClient
@@ -40,5 +40,5 @@ object AppModule {
     fun provideAppCoroutineDispatchers(): AppDispatchers = AppDispatchers()
 
     @Provides
-    fun provideLogger(): Logger = AndroidLogcatLogger()
+    fun provideLogger(): Logger = androidLogcatLogger()
 }

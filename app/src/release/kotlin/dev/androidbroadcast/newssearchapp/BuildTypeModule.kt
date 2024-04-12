@@ -12,7 +12,7 @@ import javax.inject.Singleton
 class BuildTypeModule {
     @Provides
     @Singleton
-    fun provideHttpClient(): OkHttpClient{
+    fun provideHttpClient(): OkHttpClient {
         return OkHttpClient()
     }
 

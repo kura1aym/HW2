@@ -5,7 +5,7 @@ import okhttp3.Response
 
 internal class NewsApiKeyInterceptor(
     private val apikey: String
-): Interceptor {
+) : Interceptor {
     @Suppress("SuspiciousIndentation")
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
