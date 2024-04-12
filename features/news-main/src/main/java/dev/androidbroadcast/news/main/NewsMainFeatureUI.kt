@@ -31,6 +31,7 @@ import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import dev.androidbroadcast.news.NewsTheme
 import dev.androidbroadcast.news_main.R
+import androidx.compose.runtime.remember
 
 @Composable
 fun NewsMainScreen() {
@@ -111,7 +112,7 @@ internal fun Article(
 ) {
     Row(Modifier.padding(bottom = 4.dp)){
         article.imageUrl?.let { imageUrl ->
-            var isImageVisible by  mutableStateOf(true)
+            var isImageVisible by  remember { mutableStateOf(true) }
             if(isImageVisible){
                 AsyncImage(
                     model = imageUrl,
