@@ -79,6 +79,7 @@ javax-inject = {module = "javax.inject:javax.inject",version.ref = "javax-inject
 jakarta-inject = {module = "jakarta.inject:jakarta.inject-api",version.ref = "jakarta-inject"}
 coil-core = {module = "io.coil-kt:coil", version.ref = "coil"}
 coil-compose = {module = "io.coil-kt:coil-compose", version.ref = "coil"}
+detekt-formmatting = {module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
