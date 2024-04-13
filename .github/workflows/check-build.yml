@@ -2,7 +2,7 @@ name: Code quality check
 run-name: Check code quality with linter
 on: [push]
 jobs:
-    Linters:
+    Detekt:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -22,7 +22,7 @@ jobs:
               shell: bash
               run: ./gradlew detekt
 
-            - name: Public detekt reports
+            - name: Publish Detekt reports
               uses: jwgmeligmeyling/checkstyle-github-action@master
               with:
-                path: '**/detekt.xml'
+                  path: '**/detekt.xml'
