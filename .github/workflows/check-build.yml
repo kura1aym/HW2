@@ -20,7 +20,7 @@ jobs:
 
             - name: Detekt
               shell: bash
-              run: sh ./gradlew detekt
+              run: ./gradlew detekt
 
             - name: Public detekt reports
               uses: jwgmeligmeyling/checkstyle-github-action@master
